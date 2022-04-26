@@ -1,3 +1,174 @@
 <resources>
-    <string name="app_name">MoneyManagement</string>
+    <string name="app_name">WalletForest</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="transactions_frag_title">Transactions</string>
+    <string name="report_frag_title">Report</string>
+    <string name="planning_frag_title">Planning</string>
+
+    <string name="select_time_range">Select time range</string>
+    <string name="view_by_cate">View by category</string>
+    <string name="view_by">View by </string>
+    <string name="edit_wallet">Edit wallet</string>
+    <string name="transaction">transaction</string>
+    <string name="category">category</string>
+
+
+    <string name="week">Week</string>
+    <string name="month">Month</string>
+    <string name="year">Year</string>
+    <string name="custom_range">Custom</string>
+
+    <string name="this_month">This month</string>
+    <string name="this_week">This week</string>
+    <string name="this_year">This year</string>
+
+    <string name="next_month">Next month</string>
+    <string name="next_week">Next week</string>
+    <string name="next_year">Next year</string>
+
+
+    <string name="from">From</string>
+    <string name="to">To</string>
+    <string name="select_time">Select Time</string>
+    <string name="cancel">Cancel</string>
+    <string name="ok">Ok</string>
+
+    <string name="select_category">Select category</string>
+    <string name="expense">Expense</string>
+    <string name="income">Income</string>
+
+    <string name="pick_cate_hint">Pick a category</string>
+    <string name="enter_amount_hint">Enter amount</string>
+    <string name="enter_note_hint">Write note</string>
+
+    <string name="enter_amount_reminder">Please enter amount</string>
+    <string name="enter_cate_reminder">Please pick a category</string>
+
+    <string name="select_wallet">Select wallet</string>
+
+    <string name="add_wallet">Add wallet</string>
+
+    <string name="name_hint">Name</string>
+    <string name="currency_hint">Currency</string>
+    <string name="enter_balance_hint">Enter current balance of this wallet</string>
+    <string name="save">Save</string>
+    <string name="enter_name_reminder">Please enter wallet\'s name</string>
+    <string name="enter_currency_reminder">Please enter wallet\'s currency</string>
+    <string name="error_invalid_amount">Please enter a valid amount.</string>
+    <string name="delete_wallet">DELETE THIS WALLET</string>
+    <string name="delete_wallet_dialog_title">Do you want to delete wallet %s?</string>
+    <string name="delete_wallet_message">You will also delete all of its transactions, budgets and this action cannot be undone.</string>
+
+    <string name="wallet_selection">Touch a wallet to select. Hold a wallet to edit it.</string>
+    <string name="edit">Edit</string>
+    <string name="done">Done</string>
+    <string name="select_icon">Select icon</string>
+
+    <string name="income_expense">Income &amp; Expense</string>
+    <string name="net_income">Net income</string>
+
+
+    <!-- categories label -->
+    <string name="food_n_beverage">Food &amp; Beverage</string>
+    <string name="restaurants">Restaurants</string>
+    <string name="cafe">Café</string>
+
+    <string name="bill_utilities">Bill &amp; Utilities</string>
+    <string name="phone">Phone</string>
+    <string name="water">Water</string>
+    <string name="electricity">Electricity</string>
+    <string name="gas">Gas</string>
+    <string name="television">Television</string>
+    <string name="internet">Internet</string>
+    <string name="rentals">Rentals</string>
+
+    <string name="transportation">Transportation</string>
+    <string name="taxi">Taxi</string>
+    <string name="parking_fees">Parking Fees</string>
+    <string name="petrol">Petrol</string>
+    <string name="maintenance">Maintenance</string>
+
+    <string name="shopping">Shopping</string>
+    <string name="clothing">Clothing</string>
+    <string name="footwear">Footwear</string>
+    <string name="accessories">Accessories</string>
+    <string name="electronics">Electronics</string>
+
+    <string name="friends_n_lover">Friends &amp; Lover</string>
+
+    <string name="entertainment">Entertainment</string>
+    <string name="movies">Movies</string>
+    <string name="games">Games</string>
+
+    <string name="travel">Travel</string>
+
+    <string name="health_fitness">Health &amp; Fitness</string>
+    <string name="sports">Sports</string>
+    <string name="doctor">Doctor</string>
+    <string name="pharmacy">Pharmacy</string>
+    <string name="personal_care">Personal Care</string>
+
+    <string name="gift_donations">Gift &amp; Donations</string>
+    <string name="marriage">Marriage</string>
+    <string name="funeral">Funeral</string>
+    <string name="charity">Charity</string>
+
+    <string name="family">Family</string>
+    <string name="children_baby">Children &amp; Baby</string>
+    <string name="home_improvement">Home Improvement</string>
+    <string name="home_services">Home Services</string>
+    <string name="pets">Pets</string>
+
+    <string name="education">Education</string>
+    <string name="books">Books</string>
+
+    <string name="investment">Investment</string>
+    <string name="business">Business</string>
+    <string name="insurances">Insurances</string>
+    <string name="fees_n_charges">Fees &amp; Charges</string>
+    <string name="withdrawal">Withdrawal</string>
+    <string name="other">Other</string>
+
+    <string name="award">Award</string>
+    <string name="interest_money">Interest Money</string>
+    <string name="salary">Salary</string>
+    <string name="gifts">Gifts</string>
+    <string name="selling">Selling</string>
+    <string name="parent">Parent</string>
+
+    <string name="separate_sub_category">Separate sub-categories</string>
+
+    <string name="transactions">Transactions</string>
+
+    <string name="budget">Budget</string>
+
+    <string name="budget_dis">Set budget for individual category, or for all categories in a wallet.</string>
+
+    <string name="running">Running</string>
+    <string name="ended">Ended</string>
+
+    <string name="left">Left</string>
+    <string name="overspent">Overspent</string>
+    <string name="all_categories">All categories</string>
+
+
+    <string name="enter_goal_value">Enter goal value</string>
+    <string name="budget_range_activity_title">Budget range</string>
+
+    <string name="spent">Spent</string>
+
+    <string name="budget_detail">Budget detail</string>
+
+    <string name="add_budget">Add budget</string>
+    <string name="edit_budget">Edit budget</string>
+
+    <string name="transactions_list">Transactions List</string>
+    <string name="recommend_daily_spending">Recommend daily spending</string>
+    <string name="projected_spending">Projected spending</string>
+    <string name="actual_daily_spending">Actual daily spending</string>
+
+    <string name="days_left"> day(s) left</string>
+
 </resources>

@@ -1,30 +1,36 @@
 package com.sonnt.moneymanagement.features.main_activity
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.tabs.TabLayout
 import com.sonnt.moneymanagement.R
+import com.sonnt.moneymanagement.constant.TimeRange
+import com.sonnt.moneymanagement.constant.ViewType
 import com.sonnt.moneymanagement.databinding.ActivityMainBinding
 import com.sonnt.moneymanagement.features.base.BaseActivity
+import com.sonnt.moneymanagement.features.transactions_fragment.TransactionsFragment
+import com.sonnt.moneymanagement.utils.NumberFormatter
+import com.sonnt.moneymanagement.utils.createRangeSelectDialog
+import com.sonnt.moneymanagement.utils.showRangeSelectDialog
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivity() {
     private var fragmentTransactions = TransactionsFragment()
     private var fragmentReport = ReportFragment()
-    private var fragmentPlanning = PlanningFragment()
+    //private var fragmentPlanning = PlanningFragment()
     private var activeFragment: Fragment = fragmentTransactions
     private var rangeSelectDialog: AlertDialog? = null
 
     private lateinit var binding: ActivityMainBinding
 
-    private lateinit var viewModel: MainActivityViewModel
+    private val viewModel: MainActivityViewModel by viewModels()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,8 +39,8 @@ class MainActivity : BaseActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
         supportFragmentManager.apply {
-            beginTransaction().add(R.id.fragment_container, fragmentPlanning, "frag_planning")
-                .hide(fragmentPlanning).commit()
+//            beginTransaction().add(R.id.fragment_container, fragmentPlanning, "frag_planning")
+//                .hide(fragmentPlanning).commit()
             beginTransaction().add(R.id.fragment_container, fragmentReport, "frag_report")
                 .hide(fragmentReport).commit()
             beginTransaction().add(
@@ -45,8 +51,8 @@ class MainActivity : BaseActivity() {
                 .commit()
         }
 
-        val vmFactory = RepoViewModelFactory(Repository.getInstance(this.applicationContext))
-        viewModel = ViewModelProvider(this, vmFactory).get(MainActivityViewModel::class.java)
+//        val vmFactory = RepoViewModelFactory(Repository.getInstance(this.applicationContext))
+//        viewModel = ViewModelProvider(this, vmFactory)[MainActivityViewModel::class.java]
 
 
         setSupportActionBar(binding.toolbar)
@@ -123,14 +129,14 @@ class MainActivity : BaseActivity() {
                     true
                 }
 
-                R.id.planningFragment -> {
+               /* R.id.planningFragment -> {
                     supportFragmentManager.beginTransaction().hide(activeFragment)
                         .show(fragmentPlanning).commit()
                     activeFragment = fragmentPlanning
                     if (binding.tabLayout.visibility == View.VISIBLE)
                         binding.tabLayout.visibility = View.GONE
                     true
-                }
+                }*/
 
                 else -> false
             }

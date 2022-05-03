@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import com.sonnt.moneymanagement.constant.TimeRange
 import com.sonnt.moneymanagement.constant.ViewType
+import com.sonnt.moneymanagement.data.datasource.WalletRepository
 import com.sonnt.moneymanagement.data.entities.Wallet
 import com.sonnt.moneymanagement.features.main_activity.TabInfo
 
@@ -28,7 +29,7 @@ object MMContext {
     private var _currentWalletId: MutableLiveData<Long> = MutableLiveData()
     var currentWallet: LiveData<Wallet> = Transformations.switchMap(_currentWalletId)
     {
-        walletRepository.getWalletById(it).asLiveData()
+        WalletRepository.getWalletById(it)
     }
 
     private var _timeRange = MutableLiveData<TimeRange>()

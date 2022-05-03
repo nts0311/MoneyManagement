@@ -39,8 +39,6 @@ class MainActivity : BaseActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
         supportFragmentManager.apply {
-//            beginTransaction().add(R.id.fragment_container, fragmentPlanning, "frag_planning")
-//                .hide(fragmentPlanning).commit()
             beginTransaction().add(R.id.fragment_container, fragmentReport, "frag_report")
                 .hide(fragmentReport).commit()
             beginTransaction().add(

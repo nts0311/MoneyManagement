@@ -1,24 +1,21 @@
-package com.android.walletforest.TransactionListFragment
+package com.sonnt.moneymanagement.features.transaction_list_fragment
 
 import androidx.lifecycle.*
-import com.android.walletforest.enums.TimeRange
-import com.android.walletforest.enums.ViewType
-import com.android.walletforest.model.Entities.Transaction
-import com.android.walletforest.model.repositories.Repository
-import com.android.walletforest.pie_chart_detail_activity.FilteringParams
-import com.sonnt.moneymanagement.features.transaction_list_fragment.DataGrouper
-import com.sonnt.moneymanagement.features.transaction_list_fragment.DataItem
+import com.sonnt.moneymanagement.constant.TimeRange
+import com.sonnt.moneymanagement.constant.ViewType
+import com.sonnt.moneymanagement.data.entities.Transaction
+import com.sonnt.moneymanagement.data.mm_context.MMContext
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.*
 
-class TransactionListFragViewModel(val repo: Repository) : ViewModel() {
+class TransactionListFragViewModel() : ViewModel() {
 
-    val viewMode = repo.viewMode
+    val viewMode = MMContext.viewMode
 
     private var startTime: Long = 0L
     private var endTime: Long = 0L
-    var currentWallet = repo.currentWallet
+    var currentWallet = MMContext.currentWallet
     var timeRange = TimeRange.MONTH
     var currentViewMode = ViewType.TRANSACTION
     private var dataGrouper = DataGrouper()
@@ -78,7 +75,7 @@ class TransactionListFragViewModel(val repo: Repository) : ViewModel() {
 
                     if (!filteringParams.excludeSubCate)
                         repo.categoryMap.values.forEach { category ->
-                            if (category.parentId==filteringParams.categoryIdToFilter)
+                            if (category.parentId == filteringParams.categoryIdToFilter)
                                 subCategoryId.add(category.id)
                         }
                     it.filter { transaction ->

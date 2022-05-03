@@ -16,4 +16,5 @@ object NetworkModule {
         .build()
 
     var authService: AuthService = retrofit.create(AuthService::class.java)
+    var tranactionService: TransactionService = retrofit.create(TransactionService::class.java)
 }

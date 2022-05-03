@@ -1,5 +1,5 @@
 package com.sonnt.moneymanagement.data.dto.response
 
-class AuthenticationResponse(
-    val jwtToken: String? = null
-)
+class AuthenticationResponse(): BaseResponse<String>() {
+    override var data: String? = null
+}

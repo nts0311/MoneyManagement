@@ -3,7 +3,9 @@ package com.sonnt.moneymanagement
 import android.app.Activity
 import android.app.Application
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
+import com.sonnt.moneymanagement.features.base.BaseActivity
 
 class MMApplication: Application(), Application.ActivityLifecycleCallbacks {
     override fun onCreate() {

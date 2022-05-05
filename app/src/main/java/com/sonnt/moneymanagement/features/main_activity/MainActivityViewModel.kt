@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sonnt.moneymanagement.constant.TimeRange
 import com.sonnt.moneymanagement.constant.ViewType
+import com.sonnt.moneymanagement.data.datasource.WalletRepository
 import com.sonnt.moneymanagement.data.entities.Category
 import com.sonnt.moneymanagement.data.entities.Wallet
 import com.sonnt.moneymanagement.data.mm_context.MMContext
@@ -16,15 +17,12 @@ import kotlinx.coroutines.launch
 import java.time.LocalDate
 
 class MainActivityViewModel() : ViewModel() {
-    var categoryList = MutableLiveData<List<Category>>() //repository.getCategoriesLiveData()
-    var walletList = MutableLiveData<List<Category>>()//repository.walletList
-
     var startTime: Long = 0L
         private set
     var endTime: Long = System.currentTimeMillis()
         private set
 
-    var currentWallet: LiveData<Wallet> = MMContext.currentWallet
+    var currentWallet: LiveData<Wallet> = WalletRepository.currentWallet
 
     private var timeRange = TimeRange.MONTH
 
@@ -34,7 +32,7 @@ class MainActivityViewModel() : ViewModel() {
 
     init {
         initTimeRange()
-        MMContext.setCurrentWallet(1L)
+        WalletRepository.setCurrentWallet(1L)
     }
 
     private fun initTimeRange() {

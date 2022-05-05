@@ -15,7 +15,10 @@ import com.sonnt.moneymanagement.constant.TimeRange
 import com.sonnt.moneymanagement.constant.ViewType
 import com.sonnt.moneymanagement.databinding.ActivityMainBinding
 import com.sonnt.moneymanagement.features.base.BaseActivity
-import com.sonnt.moneymanagement.features.transactions_fragment.TransactionsFragment
+import com.sonnt.moneymanagement.features.report.report_fragment.ReportFragment
+import com.sonnt.moneymanagement.features.transactions.transaction_detail_activity.TransactionDetailActivity
+import com.sonnt.moneymanagement.features.transactions.transactions_fragment.TransactionsFragment
+import com.sonnt.moneymanagement.features.wallet.select_wallet_activity.SelectWalletActivity
 import com.sonnt.moneymanagement.utils.NumberFormatter
 import com.sonnt.moneymanagement.utils.createRangeSelectDialog
 import com.sonnt.moneymanagement.utils.showRangeSelectDialog
@@ -24,7 +27,6 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : BaseActivity() {
     private var fragmentTransactions = TransactionsFragment()
     private var fragmentReport = ReportFragment()
-    //private var fragmentPlanning = PlanningFragment()
     private var activeFragment: Fragment = fragmentTransactions
     private var rangeSelectDialog: AlertDialog? = null
 
@@ -48,10 +50,6 @@ class MainActivity : BaseActivity() {
             )
                 .commit()
         }
-
-//        val vmFactory = RepoViewModelFactory(Repository.getInstance(this.applicationContext))
-//        viewModel = ViewModelProvider(this, vmFactory)[MainActivityViewModel::class.java]
-
 
         setSupportActionBar(binding.toolbar)
         setUpBottomNav()
@@ -126,16 +124,6 @@ class MainActivity : BaseActivity() {
                         binding.tabLayout.visibility = View.VISIBLE
                     true
                 }
-
-               /* R.id.planningFragment -> {
-                    supportFragmentManager.beginTransaction().hide(activeFragment)
-                        .show(fragmentPlanning).commit()
-                    activeFragment = fragmentPlanning
-                    if (binding.tabLayout.visibility == View.VISIBLE)
-                        binding.tabLayout.visibility = View.GONE
-                    true
-                }*/
-
                 else -> false
             }
         }
@@ -160,13 +148,6 @@ class MainActivity : BaseActivity() {
     }
 
     private fun registerObservers() {
-        viewModel.categoryList.observe(this)
-        {
-            if (it != null) {
-                viewModel.updateCategories(it)
-            }
-        }
-
         viewModel.currentWallet.observe(this)
         {
             if (it != null) {

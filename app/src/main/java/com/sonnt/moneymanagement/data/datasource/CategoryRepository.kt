@@ -1,6 +1,5 @@
 package com.sonnt.moneymanagement.data.datasource
 
-import androidx.lifecycle.LiveData
 import com.sonnt.moneymanagement.MMApplication
 import com.sonnt.moneymanagement.data.AppDatabase
 import com.sonnt.moneymanagement.data.entities.Category
@@ -18,22 +17,13 @@ object CategoryRepository {
 
     init {
         CoroutineScope(Dispatchers.Default).launch {
-            val walletList = categoryDao.getCategoriesFlow().first()
+            val walletList = categoryDao.getCategories().first()
 
             for (category in walletList) {
                 _categoriesMap[category.id] = category
             }
         }
     }
-
-    fun updateCategoriesMap(categories: List<Category>) {
-        for (category in categories) {
-            if (!_categoriesMap.containsKey(category.id))
-                _categoriesMap[category.id] = category
-        }
-    }
-
-    fun getCategoriesLiveData(): LiveData<List<Category>> = categoryDao.getCategories()
 
     fun getCategoriesByType(type: String) = categoryDao.getCategoriesByType(type)
 }

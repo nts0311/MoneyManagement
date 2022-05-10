@@ -45,10 +45,6 @@ class MainActivityViewModel() : ViewModel() {
         )
     }
 
-    fun updateCategories(categories: List<Category>) {
-        //repository.updateCategoriesMap(categories)
-    }
-
     fun getTabInfoList() {
         if (currentWallet.value == null)
             return

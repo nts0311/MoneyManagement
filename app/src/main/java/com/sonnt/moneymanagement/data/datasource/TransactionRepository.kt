@@ -1,15 +1,14 @@
 package com.sonnt.moneymanagement.data.datasource
 
 
+import androidx.room.withTransaction
 import com.sonnt.moneymanagement.MMApplication
 import com.sonnt.moneymanagement.constant.Constants
 import com.sonnt.moneymanagement.constant.TimeRange
 import com.sonnt.moneymanagement.data.AppDatabase
 import com.sonnt.moneymanagement.data.dao.TransactionDao
-import com.sonnt.moneymanagement.data.entities.Category
 import com.sonnt.moneymanagement.data.entities.Transaction
-import com.sonnt.moneymanagement.data.entities.Wallet
-import com.sonnt.moneymanagement.features.report.report_record_fragment.ChartEntryGenerator
+import com.sonnt.moneymanagement.features.report.common.ChartEntryGenerator
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.Job
@@ -18,7 +17,6 @@ import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.sync.Mutex
 
 object TransactionRepository {
     private val appDatabase = AppDatabase.getInstance(MMApplication.self)
@@ -62,10 +60,10 @@ object TransactionRepository {
         }
     }
 
-    fun insertTransaction(transaction: Transaction) : Job =
-        GlobalScope.launch {
-            val currentWallet = WalletRepository.currentWallet.value?.copy() ?: return@launch
-            //walletMap[transaction.walletId]!!.copy()
+    suspend fun insertTransaction(transaction: Transaction) {
+        val currentWallet = WalletRepository.currentWallet.value?.copy() ?: return
+
+        appDatabase.withTransaction {
             transactionDao.insertTransaction(transaction)
 
             if (transaction.type == Constants.TYPE_EXPENSE)
@@ -75,10 +73,12 @@ object TransactionRepository {
 
             WalletRepository.updateWallet(currentWallet)
         }
+    }
 
-    fun deleteTransaction(transaction: Transaction) : Job =
-        GlobalScope.launch {
-            val currentWallet = WalletRepository.currentWallet.value?.copy() ?: return@launch//walletMap[transaction.walletId]!!.copy()
+    suspend fun deleteTransaction(transaction: Transaction) {
+        val currentWallet = WalletRepository.currentWallet.value?.copy() ?: return
+
+        appDatabase.withTransaction {
             transactionDao.deleteTransaction(transaction)
 
             if (transaction.type == Constants.TYPE_EXPENSE)
@@ -88,27 +88,12 @@ object TransactionRepository {
 
             WalletRepository.updateWallet(currentWallet)
         }
-
-    fun updateTransaction(newTransaction: Transaction, oldTransaction: Transaction) {
-        GlobalScope.launch {
-
-            deleteTransaction(oldTransaction).join()
-            insertTransaction(newTransaction).join()
-        }
     }
 
-    fun getBarData(start: Long, end: Long, walletId: Long, timeRange: TimeRange) =
-        getTransactionsBetweenRange(start, end, walletId)
-            .map { ChartEntryGenerator.getBarChartData(it, start, end, timeRange) }
-            .flowOn(Dispatchers.Default)
-
-    fun getPieEntries(
-        start: Long,
-        end: Long,
-        walletId: Long,
-        excludeSubCate: Boolean
-    ) =
-        getTransactionsBetweenRange(start, end, walletId)
-            .map { ChartEntryGenerator.getPieEntries(it, excludeSubCate, MMApplication.self) }
-            .flowOn(Dispatchers.Default)
+    suspend fun updateTransaction(newTransaction: Transaction, oldTransaction: Transaction) {
+        appDatabase.withTransaction {
+            deleteTransaction(oldTransaction)
+            insertTransaction(newTransaction)
+        }
+    }
 }

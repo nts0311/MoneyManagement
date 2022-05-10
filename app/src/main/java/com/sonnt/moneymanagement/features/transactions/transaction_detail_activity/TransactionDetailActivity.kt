@@ -12,7 +12,6 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
-import com.android.walletforest.transaction_detail_activity.TransactionDetailViewModel
 import com.sonnt.moneymanagement.R
 import com.sonnt.moneymanagement.constant.Constants
 import com.sonnt.moneymanagement.data.entities.Transaction

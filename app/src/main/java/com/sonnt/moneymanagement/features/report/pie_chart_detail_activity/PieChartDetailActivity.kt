@@ -104,7 +104,7 @@ class PieChartDetailActivity : AppCompatActivity() {
                 val transactionType = if(isExpenseChart) Constants.TYPE_EXPENSE
                 else Constants.TYPE_INCOME
 
-                var filteringParams = FilteringParams(pair.first,transactionType,excludeSubCategory)
+                val filteringParams = FilteringParams(pair.first,transactionType,excludeSubCategory)
 
                 transactionListIntent.putExtra(RANGE_PARAMS, filteringParams)
 

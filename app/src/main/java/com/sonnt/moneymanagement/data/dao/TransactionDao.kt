@@ -9,7 +9,7 @@ import com.sonnt.moneymanagement.data.entities.Transaction
 interface TransactionDao {
 
     @Query("SELECT * FROM transactions WHERE id = :id")
-    fun getTransaction(id: Long): LiveData<Transaction>
+    fun getTransaction(id: Long): Flow<Transaction>
 
     @Query("SELECT * FROM transactions WHERE (date >= :start AND date <= :end) AND (walletId = :walletId)")
     fun getTransactionsBetweenRangeOfWallet(

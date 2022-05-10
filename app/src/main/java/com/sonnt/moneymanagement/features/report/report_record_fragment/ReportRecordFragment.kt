@@ -162,9 +162,11 @@ class ReportRecordFragment : Fragment() {
             expense += it.totalExpense.absoluteValue
         }
 
-        income_txt.text = NumberFormatter.format(income)
-        expense_txt.text = NumberFormatter.format(expense)
-        net_income_txt.text = NumberFormatter.format((income - expense))
+        val currency = viewModel.currentWallet.value?.currency ?: ""
+
+        income_txt.text = "${NumberFormatter.format(income)} $currency"
+        expense_txt.text = "${NumberFormatter.format(expense)} $currency"
+        net_income_txt.text = "${NumberFormatter.format((income - expense))} $currency"
     }
 
     private fun drawPieCharts(pieChartData: PieChartData) {

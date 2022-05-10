@@ -40,7 +40,7 @@ class TabInfoUtils {
             return sb.toString()
         }
 
-        private fun funAddFutureTab(
+        private fun addFutureTab(
             result: MutableList<TabInfo>,
             currentTimeTitle: String,
             startTime: Long,
@@ -81,7 +81,7 @@ class TabInfoUtils {
                 dStart = nextWeek.plusDays(1)
             }
 
-            funAddFutureTab(result, "This week", toEpoch(dStart), walletId)
+            addFutureTab(result, "This week", toEpoch(dStart), walletId)
             return result
         }
 
@@ -114,7 +114,7 @@ class TabInfoUtils {
                 dStart = nextMonth
             }
 
-            funAddFutureTab(result, "This month", toEpoch(dStart), walletId)
+            addFutureTab(result, "This month", toEpoch(dStart), walletId)
 
             return result
         }
@@ -142,7 +142,7 @@ class TabInfoUtils {
                 dStart = nextYear
             }
 
-            funAddFutureTab(result, "This year", toEpoch(dStart), walletId)
+            addFutureTab(result, "This year", toEpoch(dStart), walletId)
             return result
         }
 

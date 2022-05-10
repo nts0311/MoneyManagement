@@ -4,6 +4,14 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/son/AndroidStudioProjects/MoneyManagement/app/src/main/res/layout/activity_main.xml" value="0.371875" />
+        <entry key="..\:/Users/son/AndroidStudioProjects/MoneyManagement/app/src/main/res/layout/fragment_report_record.xml" value="0.371875" />
+        <entry key="..\:/Users/son/AndroidStudioProjects/MoneyManagement/app/src/main/res/layout/fragment_transaction_list.xml" value="0.371875" />
+        <entry key="..\:/Users/son/AndroidStudioProjects/MoneyManagement/app/src/main/res/layout/fragment_viewpager2.xml" value="0.371875" />
+        <entry key="..\:/Users/son/AndroidStudioProjects/MoneyManagement/app/src/main/res/layout/item_category.xml" value="0.371875" />
+        <entry key="..\:/Users/son/AndroidStudioProjects/MoneyManagement/app/src/main/res/layout/item_divider.xml" value="0.371875" />
+        <entry key="..\:/Users/son/AndroidStudioProjects/MoneyManagement/app/src/main/res/layout/item_icon.xml" value="0.371875" />
+        <entry key="..\:/Users/son/AndroidStudioProjects/MoneyManagement/app/src/main/res/layout/item_pie_data.xml" value="0.371875" />
+        <entry key="..\:/Users/son/AndroidStudioProjects/MoneyManagement/app/src/main/res/layout/item_transaction.xml" value="0.371875" />
         <entry key="..\:/Users/son/AndroidStudioProjects/MoneyManagement/app/src/main/res/menu/bottom_nav_menu.xml" value="0.371875" />
       </map>
     </option>

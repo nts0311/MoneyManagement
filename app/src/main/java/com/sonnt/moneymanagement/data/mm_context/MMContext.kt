@@ -16,11 +16,25 @@ import com.sonnt.moneymanagement.features.main_activity.TabInfo
 object MMContext {
     var currentPage: Int = 0
 
-    private var _tabInfoList = MutableLiveData<List<TabInfo>>()
-    var tabInfoList: LiveData<List<TabInfo>> = _tabInfoList
+    private var _tabInfoList = MutableLiveData<MutableList<TabInfo>>()
+    var tabInfoList: LiveData<MutableList<TabInfo>> = _tabInfoList
 
     fun setTabInfoList(list: List<TabInfo>) {
-        _tabInfoList.value = list
+        _tabInfoList.value = list.toMutableList()
+    }
+
+    private var futureTab: TabInfo? = null
+
+    fun removeFutureTab() {
+        futureTab = _tabInfoList.value?.last()
+        _tabInfoList.value = _tabInfoList.value?.dropLast(1)?.toMutableList()
+    }
+
+    fun addFutureTab() {
+        if(futureTab == null) return
+
+        _tabInfoList.value?.add(futureTab!!)
+        _tabInfoList.value = _tabInfoList.value
     }
 
 

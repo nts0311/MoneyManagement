@@ -13,6 +13,7 @@ import com.google.android.material.tabs.TabLayout
 import com.sonnt.moneymanagement.R
 import com.sonnt.moneymanagement.constant.TimeRange
 import com.sonnt.moneymanagement.constant.ViewType
+import com.sonnt.moneymanagement.data.mm_context.MMContext
 import com.sonnt.moneymanagement.databinding.ActivityMainBinding
 import com.sonnt.moneymanagement.features.base.BaseActivity
 import com.sonnt.moneymanagement.features.report.report_fragment.ReportFragment
@@ -113,6 +114,7 @@ class MainActivity : BaseActivity() {
                     activeFragment = fragmentTransactions
                     if (binding.tabLayout.visibility == View.GONE)
                         binding.tabLayout.visibility = View.VISIBLE
+                    MMContext.addFutureTab()
                     true
                 }
 
@@ -120,6 +122,7 @@ class MainActivity : BaseActivity() {
                     supportFragmentManager.beginTransaction().hide(activeFragment)
                         .show(fragmentReport).commit()
                     activeFragment = fragmentReport
+                    MMContext.removeFutureTab()
                     if (binding.tabLayout.visibility == View.GONE)
                         binding.tabLayout.visibility = View.VISIBLE
                     true

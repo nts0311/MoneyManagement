@@ -68,7 +68,7 @@ class TransactionListFragViewModel() : BaseViewModel() {
         timeRange = TimeRange.valueOf(range)
 
         filteredList = TransactionRepository.getTransactionsBetweenRange(start, end, walletId)
-        groupData()
+        groupData(filteringParams)
 
         previousWalletId = walletId
     }

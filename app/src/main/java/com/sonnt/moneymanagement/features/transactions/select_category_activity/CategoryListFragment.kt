@@ -49,11 +49,6 @@ class CategoryListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        /*val vmFactory = RepoViewModelFactory(Repository.getInstance(requireContext()))
-
-        viewModel = ViewModelProvider(requireActivity(), vmFactory)
-            .get(categoryType!!, CategorySelectFragViewModel::class.java)*/
-
         viewModel.setCategoryType(categoryType!!)
 
         return inflater.inflate(R.layout.fragment_category_list, container, false)

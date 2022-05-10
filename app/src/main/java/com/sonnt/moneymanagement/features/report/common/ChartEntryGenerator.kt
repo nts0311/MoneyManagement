@@ -1,17 +1,15 @@
-package com.sonnt.moneymanagement.features.report.report_record_fragment
+package com.sonnt.moneymanagement.features.report.common
 
 import android.content.Context
 import android.graphics.drawable.ScaleDrawable
 import android.view.Gravity
 import com.github.mikephil.charting.data.PieEntry
+import com.sonnt.moneymanagement.MMApplication
 import com.sonnt.moneymanagement.R
 import com.sonnt.moneymanagement.constant.Constants
 import com.sonnt.moneymanagement.constant.TimeRange
 import com.sonnt.moneymanagement.data.datasource.CategoryRepository
 import com.sonnt.moneymanagement.data.entities.Transaction
-import com.sonnt.moneymanagement.data.mm_context.MMContext
-import com.sonnt.moneymanagement.features.report.common.BarChartData
-import com.sonnt.moneymanagement.features.report.common.PieChartData
 import com.sonnt.moneymanagement.utils.*
 import kotlinx.coroutines.yield
 
@@ -30,7 +28,7 @@ class ChartEntryGenerator() {
 
             val rangeEndDate = end
 
-            val barChartData = when (timeRange) {
+            return when (timeRange) {
                 TimeRange.MONTH -> {
                     getBarChartData(
                         transactions,
@@ -99,8 +97,6 @@ class ChartEntryGenerator() {
                     Pair(start, end)
                 }
             }
-
-            return barChartData
         }
 
         private fun getLabel(timeRange: TimeRange, startTime: Long, endTime: Long): String =
@@ -119,12 +115,14 @@ class ChartEntryGenerator() {
             getNextRange: (Long, Long) -> Pair<Long, Long>
         ): List<BarChartData> {
 
-            val maxEntryCount = when (timeRange) {
+            var maxEntryCount = when (timeRange) {
                 TimeRange.MONTH -> 5
                 TimeRange.WEEK -> 7
                 TimeRange.YEAR -> 12
                 TimeRange.CUSTOM -> 1
             }
+
+            if (end == Long.MAX_VALUE) maxEntryCount = 1
 
             var startTime = start
             var endTime = end
@@ -141,18 +139,16 @@ class ChartEntryGenerator() {
                 result
             }
 
-            for (transaction in transactions) {
+            for (barData in result) {
                 yield()
-                for (barData in result) {
-                    yield()
-                    if (transaction.date in barData.startDate..barData.endDate) {
-                        if (transaction.type == Constants.TYPE_INCOME)
-                            barData.totalIncome += transaction.amount
-                        else
-                            barData.totalExpense -= transaction.amount
+                val transactionsInBarRange = transactions.filter { it.date in barData.startDate..barData.endDate }
 
-                        break
-                    }
+                barData.totalExpense = transactionsInBarRange.filter { it.type == Constants.TYPE_EXPENSE }.fold(0L) {sum, transaction ->
+                    sum - transaction.amount
+                }
+
+                barData.totalIncome = transactionsInBarRange.filter { it.type == Constants.TYPE_INCOME }.fold(0L) {sum, transaction ->
+                    sum + transaction.amount
                 }
             }
 
@@ -173,8 +169,7 @@ class ChartEntryGenerator() {
 
         suspend fun getPieEntries(
             transactions: List<Transaction>,
-            excludeSubCate: Boolean,
-            context: Context
+            excludeSubCate: Boolean
         ): PieChartData {
             val categoriesMap = CategoryRepository.categoryMap
 
@@ -202,14 +197,13 @@ class ChartEntryGenerator() {
                 incomeCategoryMap.toList().sortedByDescending { (_, value) -> value }
             result.expenseCategoryInfo =
                 expenseCategoryMap.toList().sortedByDescending { (_, value) -> value }
-            result.incomePieEntries = toPieEntries(context, result.incomeCategoryInfo)
-            result.expensePieEntries = toPieEntries(context, result.expenseCategoryInfo)
+            result.incomePieEntries = toPieEntries(result.incomeCategoryInfo)
+            result.expensePieEntries = toPieEntries(result.expenseCategoryInfo)
 
             return result
         }
 
         private suspend fun toPieEntries(
-            context: Context,
             pieList: List<Pair<Long, Long>>
         ): List<PieEntry> {
             val categoriesMap = CategoryRepository.categoryMap
@@ -219,13 +213,13 @@ class ChartEntryGenerator() {
             if (pieList.size <= 5) {
                 pieList.forEach {
                     yield()
-                    val cateImage = getDrawable(context, categoriesMap[it.first]!!.imageId)
+                    val cateImage = getDrawable(MMApplication.self, categoriesMap[it.first]!!.imageId)
                     pieEntries.add(PieEntry(it.second.toFloat(), cateImage))
                 }
             } else {
                 for (i in 0..4) {
                     yield()
-                    val cateImage = getDrawable(context, categoriesMap[pieList[i].first]!!.imageId)
+                    val cateImage = getDrawable(MMApplication.self, categoriesMap[pieList[i].first]!!.imageId)
                     pieEntries.add(PieEntry(pieList[i].second.toFloat(), cateImage))
                 }
 
@@ -238,7 +232,7 @@ class ChartEntryGenerator() {
                 pieEntries.add(
                     PieEntry(
                         otherCateAmount.toFloat(),
-                        getDrawable(context, R.drawable.ic_category_other_chart)
+                        getDrawable(MMApplication.self, R.drawable.ic_category_other_chart)
                     )
                 )
             }

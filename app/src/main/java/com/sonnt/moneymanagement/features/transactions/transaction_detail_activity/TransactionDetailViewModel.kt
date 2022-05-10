@@ -1,13 +1,12 @@
-package com.android.walletforest.transaction_detail_activity
+package com.sonnt.moneymanagement.features.transactions.transaction_detail_activity
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.*
 import com.sonnt.moneymanagement.data.datasource.CategoryRepository
 import com.sonnt.moneymanagement.data.datasource.TransactionRepository
 import com.sonnt.moneymanagement.data.datasource.WalletRepository
 import com.sonnt.moneymanagement.data.entities.Transaction
 import com.sonnt.moneymanagement.features.base.BaseViewModel
+import kotlinx.coroutines.launch
 
 class TransactionDetailViewModel() : BaseViewModel() {
     private val currentId = 0L
@@ -17,21 +16,27 @@ class TransactionDetailViewModel() : BaseViewModel() {
 
     fun setTransactionId(id: Long) {
         if (currentId == id) return
-        transaction = TransactionRepository.getTransaction(id)
+        transaction = TransactionRepository.getTransaction(id).asLiveData()
     }
 
     fun updateTransaction(transaction: Transaction) {
         if (transaction == this.transaction.value)
             return
 
-        TransactionRepository.updateTransaction(transaction, this.transaction.value!!)
+        viewModelScope.launch {
+            TransactionRepository.updateTransaction(transaction, this@TransactionDetailViewModel.transaction.value!!)
+        }
     }
 
     fun insertTransaction(transaction: Transaction) {
-        TransactionRepository.insertTransaction(transaction)
+        viewModelScope.launch {
+            TransactionRepository.insertTransaction(transaction)
+        }
     }
 
     fun deleteTransaction(transaction: Transaction) {
-        TransactionRepository.deleteTransaction(transaction)
+        viewModelScope.launch {
+            TransactionRepository.deleteTransaction(transaction)
+        }
     }
 }

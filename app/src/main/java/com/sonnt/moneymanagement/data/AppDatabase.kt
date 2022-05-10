@@ -49,13 +49,8 @@ abstract class AppDatabase() : RoomDatabase() {
 
                         scope.launch {
                             database.walletDao.insertWallet(
-                                Wallet(1,"All", R.drawable.ic_category_all, 100000,"đ")
+                                Wallet(1,"All", R.drawable.ic_category_all, 0,"đ")
                             )
-//                            database.walletDao.insertWallet(
-//                                Wallet(2,"Cash", R.drawable.icon, 100000,"đ"))
-//                            database.walletDao.insertWallet(
-//                                Wallet(3,"Cash2", R.drawable.icon, 1,"đ"))
-
 
                             database.categoryDao.insertCategory(
                                 Category(1,1,context.getString(R.string.food_n_beverage), Constants.TYPE_EXPENSE,R.drawable.ic_category_foodndrink)
@@ -187,101 +182,6 @@ abstract class AppDatabase() : RoomDatabase() {
                                 Category(54,54,context.getString(R.string.parent), Constants.TYPE_INCOME,R.drawable.icon_29))
                             database.categoryDao.insertCategory(
                                 Category(55,55,context.getString(R.string.other), Constants.TYPE_INCOME,R.drawable.icon_28))
-
-                            /*database.transactionDao.insertTransaction(
-                                Transaction
-                                    (12, 1, 2, Constants.TYPE_EXPENSE, 12, "aaa", 1599004800000))
-
-                            database.transactionDao.insertTransaction(
-                                Transaction
-                                    (1, 2, 2, Constants.TYPE_EXPENSE, 1, "aaa", 1599004800000)
-                            )
-
-                            database.transactionDao.insertTransaction(
-                                Transaction
-                                    (2, 3, 2, Constants.TYPE_EXPENSE, 2, "aaa", 1599004800000)
-                            )
-
-                            //5-9
-                            database.transactionDao.insertTransaction(
-                                Transaction
-                                    (3, 3, 2, Constants.TYPE_EXPENSE, 3, "aaa", 1599264000000)
-                            )
-
-                            database.transactionDao.insertTransaction(
-                                Transaction
-                                    (4, 1, 2, Constants.TYPE_EXPENSE, 4, "aaa", 1599264000000)
-                            )
-
-
-                            //13-9
-                            database.transactionDao.insertTransaction(
-                                Transaction
-                                    (5, 2, 2, Constants.TYPE_EXPENSE, 5, "aaa", 1599955200000)
-                            )
-
-                            database.transactionDao.insertTransaction(
-                                Transaction
-                                    (6, 3, 2, Constants.TYPE_EXPENSE, 6, "aaa", 1599955200000)
-                            )
-
-                            database.transactionDao.insertTransaction(
-                                Transaction
-                                    (7, 1, 2, Constants.TYPE_EXPENSE, 7, "aaa", 1599955200000)
-                            )
-
-                            database.transactionDao.insertTransaction(
-                                Transaction
-                                    (8, 4, 2, Constants.TYPE_INCOME, 8, "aaa", 1599955200000)
-                            )
-
-
-                            //24-9
-                            database.transactionDao.insertTransaction(
-                                Transaction
-                                    (9, 4, 2, Constants.TYPE_INCOME, 9, "aaa", 1600905600000)
-                            )
-
-                            //2-9
-                            database.transactionDao.insertTransaction(
-                                Transaction
-                                    (10, 1, 2, Constants.TYPE_EXPENSE, 10, "aaa", 1599004800000)
-                            )
-
-                            database.transactionDao.insertTransaction(
-                                Transaction
-                                    (10, 43, 2, Constants.TYPE_EXPENSE, 20, "aaa", 1599004800000)
-                            )
-
-                            database.transactionDao.insertTransaction(
-                                Transaction
-                                    (11, 21, 2, Constants.TYPE_EXPENSE, 17, "aaa", 1599004800000)
-                            )
-
-                            database.transactionDao.insertTransaction(
-                                Transaction
-                                    (12, 7, 2, Constants.TYPE_EXPENSE, 6, "aaa", 1599004800000)
-                            )
-
-                            //3-8
-                            database.transactionDao.insertTransaction(
-                                Transaction
-                                    (13, 1, 2, Constants.TYPE_EXPENSE, 11, "aaa", 1596412800000)
-                            )
-                            //31-8
-                            database.transactionDao.insertTransaction(
-                                Transaction
-                                    (14, 1, 2, Constants.TYPE_EXPENSE, 13, "aaa", 1598832000000)
-                            )*/
-
-
-                            /*database.budgetDao.insertBudget(Budget(1,1,2,10000,1500,1598918400, 1601424000))
-                            database.budgetDao.insertBudget(Budget(2,12,2,500000,1000000,1598918400, 1601424000))
-                            database.budgetDao.insertBudget(Budget(3,36,2,20000000,16000000,1598918400, 1601424000))
-                            database.budgetDao.insertBudget(Budget(4,22,2,2000000,0,1601510401000, 1604102401000))
-                            database.budgetDao.insertBudget(Budget(5,1,2,2000000,0,1601510401000, 1604102401000))
-                            database.budgetDao.insertBudget(Budget(6,2,2,500000,0,1601510401000, 1604102401000))
-                            database.budgetDao.insertBudget(Budget(7,-1,2,50000000,0,1601510401000, 1604102401000))*/
                         }
                     }
                 })

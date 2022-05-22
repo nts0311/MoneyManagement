@@ -47,7 +47,7 @@ class ReportRecordFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        if (startTime != null && endTime != null && timeRange != null) {
+        if (startTime != null && endTime != null && timeRange != null && endTime!=Long.MAX_VALUE) {
             viewModel.setTimeRange(startTime!!, endTime!!, timeRange!!, walletId!!)
             viewModel.getPieEntries(startTime!!, endTime!!, walletId!!)
         }

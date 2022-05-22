@@ -23,9 +23,9 @@ object MMContext {
         _tabInfoList.value = list.toMutableList()
     }
 
-    private var futureTab: TabInfo? = null
+    //private var futureTab: TabInfo? = null
 
-    fun removeFutureTab() {
+    /*fun removeFutureTab() {
         futureTab = _tabInfoList.value?.last()
         _tabInfoList.value = _tabInfoList.value?.dropLast(1)?.toMutableList()
     }
@@ -35,7 +35,7 @@ object MMContext {
 
         _tabInfoList.value?.add(futureTab!!)
         _tabInfoList.value = _tabInfoList.value
-    }
+    }*/
 
 
     private var _timeRange = MutableLiveData<TimeRange>()

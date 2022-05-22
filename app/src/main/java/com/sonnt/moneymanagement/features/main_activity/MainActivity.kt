@@ -114,7 +114,6 @@ class MainActivity : BaseActivity() {
                     activeFragment = fragmentTransactions
                     if (binding.tabLayout.visibility == View.GONE)
                         binding.tabLayout.visibility = View.VISIBLE
-                    MMContext.addFutureTab()
                     true
                 }
 
@@ -122,7 +121,6 @@ class MainActivity : BaseActivity() {
                     supportFragmentManager.beginTransaction().hide(activeFragment)
                         .show(fragmentReport).commit()
                     activeFragment = fragmentReport
-                    MMContext.removeFutureTab()
                     if (binding.tabLayout.visibility == View.GONE)
                         binding.tabLayout.visibility = View.VISIBLE
                     true

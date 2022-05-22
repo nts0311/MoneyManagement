@@ -1,7 +1,8 @@
 package com.sonnt.moneymanagement.features.transactions.transaction_list_activity
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
 import com.sonnt.moneymanagement.R
 import com.sonnt.moneymanagement.constant.TimeRange
 import com.sonnt.moneymanagement.features.transactions.transaction_list_fragment.*
@@ -42,5 +43,15 @@ class TransactionListActivity : AppCompatActivity() {
         supportFragmentManager.beginTransaction()
             .replace(R.id.transactions_frag_container, transactionsFragment)
             .commit()
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> {
+                onBackPressed()
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 }
